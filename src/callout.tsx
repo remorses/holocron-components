@@ -17,7 +17,7 @@ function CalloutTemplate({
     return (
         <div
             className={clsx(
-                'px-5 py-4 not-prose mb-4 overflow-hidden rounded-xl',
+                'px-5 py-4 mb-4 overflow-hidden rounded-xl',
                 className,
             )}
         >
@@ -25,7 +25,7 @@ function CalloutTemplate({
                 <div className='mt-1 w-4'>{icon}</div>
                 <div
                     className={clsx(
-                        'flex-1 text-sm prose overflow-x-auto',
+                        'flex-1 text-sm overflow-x-auto [&_p]:!my-0',
                         childrenClassName,
                     )}
                 >

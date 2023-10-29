@@ -13,6 +13,7 @@ import { componentsExtensionTypes } from './constants'
 
 const classes = ['note', 'warning']
 
+
 type CalloutType = (typeof classes)[number]
 
 export const CalloutExtension = Node.create({
@@ -73,7 +74,9 @@ function Component({ node, updateAttributes }: NodeViewProps) {
 
     return (
         <NodeViewWrapper>
-            <Callout type={type} children={<NodeViewContent />} />
+            <Callout type={type}>
+                <NodeViewContent className='' />
+            </Callout>
         </NodeViewWrapper>
     )
 }
