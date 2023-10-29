@@ -23,16 +23,17 @@
         "@tiptap/core": "^2.1.12",
         "@tiptap/react": "^2.1.12",
         "clsx": "^2.0.0",
+        "is-absolute-url": "^4.0.1",
         "lucide-react": "^0.260.0"
     },
     "peerDependencies": {
-        "react": "*",
         "prosemirror-model": "*",
+        "react": "*",
         "react-dom": "*"
     },
     "devDependencies": {
-        "prosemirror-markdown": "^1.11.2",
         "@types/react": "18.2.23",
+        "prosemirror-markdown": "^1.11.2",
         "prosemirror-model": "^1.19.3",
         "react": "18.2.0"
     }

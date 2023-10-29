@@ -1,5 +1,6 @@
 import { CalloutExtension } from './callout.extension'
+import { CardExtension } from './card.extension'
 
-export { CalloutExtension }
 
-export const holocronComponentsExtensions = [CalloutExtension]
+
+export const holocronComponentsExtensions = [CalloutExtension, CardExtension]
