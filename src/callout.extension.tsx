@@ -1,30 +1,42 @@
-import { Editor, Node, NodeViewProps, mergeAttributes } from '@tiptap/core'
-import { Node as PNode } from 'prosemirror-model'
-import { MarkdownSerializerState } from 'prosemirror-markdown'
+import { Node, NodeViewProps } from '@tiptap/core'
 import {
     NodeViewContent,
     NodeViewWrapper,
     ReactNodeViewRenderer,
 } from '@tiptap/react'
-import clsx from 'clsx'
-import { Callout } from './callout'
-import { SimpleSelect } from './SimpleSelect'
+import { MarkdownSerializerState } from 'prosemirror-markdown'
+import { Node as PNode } from 'prosemirror-model'
+import { Note, Tip, Warning, Check, Info } from './callout'
 import { componentsExtensionTypes } from './constants'
 
-const classes = ['note', 'warning']
-
+const classes = ['note', 'warning', 'info', 'tip', 'check']
 
 type CalloutType = (typeof classes)[number]
 
+export function Callout({ type = 'note' as CalloutType, children }) {
+    if (type === 'warning') {
+        return <Warning>{children}</Warning>
+    }
+    if (type === 'note') {
+        return <Note>{children}</Note>
+    }
+    if (type === 'info') {
+        return <Info>{children}</Info>
+    }
+    if (type === 'tip') {
+        return <Tip>{children}</Tip>
+    }
+    if (type === 'check') {
+        return <Check>{children}</Check>
+    }
+    return <Info>{children}</Info>
+}
+
 export const CalloutExtension = Node.create({
     name: componentsExtensionTypes.jsxCallout,
-
     group: 'block',
-
     content: 'block*',
     defining: true,
-
-    // draggable: true,
 
     parseHTML() {
         return [
@@ -36,9 +48,6 @@ export const CalloutExtension = Node.create({
     renderHTML({ HTMLAttributes, node }) {
         return [this.name, HTMLAttributes, 0]
     },
-    // renderHTML({ HTMLAttributes, node }) {
-    //     return ['callout', mergeAttributes(HTMLAttributes, node.attrs), 0]
-    // },
 
     addAttributes() {
         return {
@@ -47,7 +56,6 @@ export const CalloutExtension = Node.create({
             },
         }
     },
-
     addNodeView() {
         return ReactNodeViewRenderer(Component)
     },
@@ -60,7 +68,6 @@ export const CalloutExtension = Node.create({
                     state.wrapBlock('    ', null, node, () =>
                         state.renderContent(node),
                     )
-
                     state.write(`</Callout>`)
                     state.ensureNewLine()
                 },
