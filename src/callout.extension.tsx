@@ -21,6 +21,7 @@ export const CalloutExtension = Node.create({
     group: 'block',
 
     content: 'block*',
+    defining: true,
 
     // draggable: true,
 
@@ -69,45 +70,10 @@ export const CalloutExtension = Node.create({
 
 function Component({ node, updateAttributes }: NodeViewProps) {
     const type = node.attrs.type
-    let IconComponent = Callout.icons[type]
 
     return (
-        <NodeViewWrapper
-            className={clsx(
-                'relative my-8 flex flex-col gap-2 rounded p-6 pt-2',
-                Callout.styles[type]?.container,
-            )}
-        >
-            <div contentEditable={false} className='flex'>
-                <div className='grow'></div>
-                <SimpleSelect.Container className=''>
-                    <SimpleSelect.Select
-                        value={type}
-                        // defaultValue={defaultLanguage}
-                        onChange={(event) =>
-                            updateAttributes({ type: event.target.value })
-                        }
-                    >
-                        {Object.keys(Callout.styles).map((t, index) => (
-                            <option key={index} value={t}>
-                                {t}
-                            </option>
-                        ))}
-                    </SimpleSelect.Select>
-                    <SimpleSelect.Icon />
-                </SimpleSelect.Container>
-            </div>
-            <div className='flex items-center'>
-                <IconComponent
-                    contentEditable={false}
-                    className='h-8 w-8 flex-none'
-                />
-                <div className='ml-4 max-w-max flex-auto'>
-                    <NodeViewContent
-                        className={clsx('', Callout.styles[type].body)}
-                    />
-                </div>
-            </div>
+        <NodeViewWrapper>
+            <Callout type={type} children={<NodeViewContent />} />
         </NodeViewWrapper>
     )
 }
