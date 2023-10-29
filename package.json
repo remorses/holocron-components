@@ -1,0 +1,39 @@
+{
+    "name": "holocron-components",
+    "version": "0.0.0",
+    "private": false,
+    "description": "",
+    "main": "dist/index.js",
+    "module": "esm/index.js",
+    "types": "dist/index.d.ts",
+    "repository": "https://github.com/remorses/holocron-components",
+    "scripts": {
+        "build": "tsc && tsc -m es6 --outDir esm",
+        "watch": "tsc -w"
+    },
+    "files": [
+        "dist",
+        "src",
+        "esm"
+    ],
+    "keywords": [],
+    "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
+    "license": "",
+    "dependencies": {
+        "@tiptap/core": "^2.1.12",
+        "@tiptap/react": "^2.1.12",
+        "clsx": "^2.0.0",
+        "lucide-react": "^0.260.0"
+    },
+    "peerDependencies": {
+        "react": "*",
+        "prosemirror-model": "*",
+        "react-dom": "*"
+    },
+    "devDependencies": {
+        "prosemirror-markdown": "^1.11.2",
+        "@types/react": "18.2.23",
+        "prosemirror-model": "^1.19.3",
+        "react": "18.2.0"
+    }
+}
