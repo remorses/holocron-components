@@ -37,7 +37,7 @@ const tagName = 'Callout'
 export const CalloutExtension = Node.create({
     name: componentsExtensionTypes.jsxCallout,
     group: 'block',
-    content: 'block*',
+    content: 'paragraph*',
     defining: true,
     ...makeExtensionConfig({
         tagName,
