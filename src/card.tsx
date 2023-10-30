@@ -99,7 +99,7 @@ export function Card<T extends ElementType = 'div'>({
 
                 <h2
                     className={clsx(
-                        'font-semibold  text-base text-slate-800 dark:text-white',
+                        'font-semibold text-base text-slate-800 dark:text-white',
                         icon !== null && icon !== undefined && 'mt-4',
                     )}
                 >

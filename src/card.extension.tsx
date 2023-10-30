@@ -25,11 +25,12 @@ import {
 import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 
+const inputClass = 'card-title-input'
 export const CardExtension = Node.create({
     name: componentsExtensionTypes.jsxCard,
     group: 'block',
-    content: 'block*',
-    // defining: true,
+    content: 'paragraph*',
+    defining: true,
 
     parseHTML() {
         return [
@@ -44,9 +45,27 @@ export const CardExtension = Node.create({
     },
     // addKeyboardShortcuts() {
     //     return {
-    //         'Arrow-up': () => {
-                
-    //         }
+    //         'ArrowUp': (state) => {
+    //             const currentNode = this.editor.state.selection.$from.node()
+    //             if (currentNode.type.name !== this.name) {
+    //                 return false
+    //             }
+    //             // get node view
+    //             const nodeView = this.editor.view.nodeDOM(
+    //                 this.editor.state.selection.$from.pos,
+    //             )
+    //             if (!nodeView) {
+    //                 return false
+    //             }
+    //             const input = nodeView.querySelector(
+    //                 `.${clas}`,
+    //             ) as HTMLInputElement
+    //             if (input) {
+    //                 input.focus()
+    //                 return true
+    //             }
+    //             return false
+    //         },
     //     }
     // },
     addAttributes() {
@@ -95,7 +114,7 @@ function Component({
     return (
         <NodeViewWrapper>
             <Card
-                className='relative'
+                className='relative non-draggable'
                 icon='https://em-content.zobj.net/source/apple/354/fire_1f525.png'
                 _iconElement={
                     <IconPicker
@@ -114,7 +133,10 @@ function Component({
                 title={
                     <input
                         contentEditable={true}
-                        className='appearance-none focus:outline-none not-prose bg-transparent w-full'
+                        className={clsx(
+                            'appearance-none focus:outline-none not-prose bg-transparent w-full',
+                            inputClass,
+                        )}
                         value={node.attrs.title}
                         ref={inputRef}
                         // autoFocus
