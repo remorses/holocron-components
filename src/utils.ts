@@ -1,4 +1,4 @@
-import { Attributes, NodeConfig } from '@tiptap/core'
+import { Attributes, NodeConfig, findParentNode } from '@tiptap/core'
 import { Node as PNode } from 'prosemirror-model'
 
 import { MarkdownSerializerState } from 'prosemirror-markdown'
@@ -66,8 +66,10 @@ export function makeExtensionConfig({
                         state.wrapBlock('    ', null, node, () =>
                             state.renderContent(node),
                         )
-                        state.write(`</${tagName}>`)
-                        state.ensureNewLine()
+                        state.write(`</${tagName}>\n`)
+                        if (!state['delim']) {
+                            state.write('\n')
+                        }
                     },
                 },
             }
