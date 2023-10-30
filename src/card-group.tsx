@@ -13,7 +13,7 @@ export function CardGroup({
     return (
         <div
             className={clsx(
-                `grid sm:grid-cols-${cols} gap-x-4`,
+                `grid my-6 sm:grid-cols-${cols} gap-x-4`,
                 className,
             )}
         >

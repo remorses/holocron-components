@@ -45,7 +45,7 @@ export const CardExtension = Node.create({
                 default: '',
             },
             title: {
-                default: '',
+                default: 'Card Title',
             },
             href: {
                 default: '',
@@ -168,25 +168,28 @@ const allIcons = Object.values(feather.icons)
 
 function IconPicker({ children, value, onChange }) {
     const [search, setSearch] = useState('')
+    const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure()
     let icons = allIcons.filter((icon) => {
         if (!search) {
             return true
         }
         return icon.name.includes(search)
     })
+    useEffect(() => {
+        if (!isOpen) {
+            setSearch('')
+        }
+        if (isOpen) {
+            setTimeout(() => inputRef.current?.focus(), 10)
+        }
+    }, [isOpen])
     const inputRef = useRef<any>(null)
 
     return (
         <Popover
             contentEditable={false}
-            onOpenChange={(isOpen) => {
-                if (!isOpen) {
-                    setSearch('')
-                }
-                if (isOpen) {
-                    setTimeout(() => inputRef.current?.focus(), 10)
-                }
-            }}
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
             shouldBlockScroll
             backdrop='opaque'
             triggerScaleOnOpen={false}
@@ -197,6 +200,7 @@ function IconPicker({ children, value, onChange }) {
         >
             <PopoverTrigger
                 contentEditable={false}
+                onClick={onOpen}
                 className='cursor-pointer p-1 -m-1 dark:hover:bg-gray-800 rounded max-w-max'
             >
                 {children}
@@ -224,9 +228,10 @@ function IconPicker({ children, value, onChange }) {
                                     key={icon.name}
                                     onClick={() => {
                                         onChange(icon.name)
+                                        onClose()
                                     }}
                                     className={clsx(
-                                        'appearance-none flex flex-col p-1 rounded items-center justify-center gap-1 text-center',
+                                        'appearance-none shrink-0 w-9 h-9 flex flex-col p-1 rounded items-center justify-center gap-1 text-center',
                                         value === icon.name &&
                                             'bg-gray-200 dark:bg-gray-700',
                                     )}
@@ -293,7 +298,7 @@ function LinkButton({ onChange, value }) {
                 //     onClose()
                 //     setHref(value)
                 // }}
-                backdrop='blur'
+                backdrop='opaque'
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
             >

@@ -11,6 +11,7 @@ import { componentsExtensionTypes } from './constants'
 import { Card } from './card'
 import { CardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
+import { Button } from '@nextui-org/react'
 
 const tagName = 'CardGroup'
 export const CardGroupExtension = Node.create({
@@ -44,31 +45,35 @@ function Component({
         <NodeViewWrapper>
             <CardGroup cols={cols}>
                 <NodeViewContent />
-                <Card
-                    className='cursor-pointer dark:bg-gray-850'
-                    icon={''}
-                    onClick={() => {
-                        const pos = getPos() + 1
-                        // get end position of last block
+                <div className='flex col-span-full p-4 w-full h-full flex-col items-center justify-center'>
+                    <Button
+                        size='sm'
+                        variant='ghost'
+                        className='border-0'
+                        onClick={() => {
+                            const pos = getPos() + 1
+                            // get end position of last block
 
-                        editor
-                            .chain()
-                            .focus(pos)
-                            .insertContent({
-                                type: componentsExtensionTypes.jsxCard,
-                                content: [
-                                    {
-                                        type: 'paragraph',
-                                        content: [
-                                            //
-                                        ],
-                                    },
-                                ],
-                            })
-                            .run()
-                    }}
-                    title='Add New Card'
-                />
+                            editor
+                                .chain()
+                                .focus(pos)
+                                .insertContent({
+                                    type: componentsExtensionTypes.jsxCard,
+                                    content: [
+                                        {
+                                            type: 'paragraph',
+                                            content: [
+                                                //
+                                            ],
+                                        },
+                                    ],
+                                })
+                                .run()
+                        }}
+                    >
+                        Add New Card
+                    </Button>
+                </div>
             </CardGroup>
         </NodeViewWrapper>
     )

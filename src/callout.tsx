@@ -17,7 +17,7 @@ function CalloutTemplate({
     return (
         <div
             className={clsx(
-                'px-5 non-draggable py-4 mb-4 overflow-hidden rounded-xl',
+                'px-5 non-draggable py-4 my-6 overflow-hidden rounded-xl',
                 className,
             )}
         >
