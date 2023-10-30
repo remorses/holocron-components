@@ -10,48 +10,24 @@ import { Note, Tip, Warning, Check, Info } from './callout'
 import { componentsExtensionTypes } from './constants'
 import { Card } from './card'
 import { CardGroup } from './card-group'
+import { makeExtensionConfig } from './utils'
 
+const tagName = 'CardGroup'
 export const CardGroupExtension = Node.create({
     name: componentsExtensionTypes.jsxCardGroup,
     group: 'block',
     content: componentsExtensionTypes.jsxCard + '+',
-    // defining: true,
-
-    parseHTML() {
-        return [
-            {
-                tag: this.name,
-            },
-        ]
-    },
-    renderHTML({ HTMLAttributes, node }) {
-        return [this.name, HTMLAttributes, 0]
-    },
-
-    addAttributes() {
-        return {
+    defining: true,
+    ...makeExtensionConfig({
+        tagName,
+        attributes: {
             cols: {
                 default: 2,
             },
-        }
-    },
+        },
+    }),
     addNodeView() {
         return ReactNodeViewRenderer(Component)
-    },
-    addStorage() {
-        return {
-            markdown: {
-                serialize(state: MarkdownSerializerState, node: PNode) {
-                    state.write(`<CardGroup cols="${node.attrs.cols}">`)
-                    state.ensureNewLine()
-                    state.wrapBlock('    ', null, node, () =>
-                        state.renderContent(node),
-                    )
-                    state.write(`</CardGroup>`)
-                    state.ensureNewLine()
-                },
-            },
-        }
     },
 })
 
@@ -71,7 +47,6 @@ function Component({
                 <Card
                     className='cursor-pointer dark:bg-gray-850'
                     icon={''}
-
                     onClick={() => {
                         const pos = getPos() + 1
                         // get end position of last block

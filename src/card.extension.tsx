@@ -26,78 +26,29 @@ import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 
 const inputClass = 'card-title-input'
+
+const tagName = 'Card'
 export const CardExtension = Node.create({
     name: componentsExtensionTypes.jsxCard,
     group: 'block',
     content: 'paragraph*',
     defining: true,
-
-    parseHTML() {
-        return [
-            {
-                tag: this.name,
+    ...makeExtensionConfig({
+        tagName,
+        attributes: {
+            icon: {
+                default: '',
             },
-        ]
-    },
-
-    renderHTML({ HTMLAttributes, node }) {
-        return [this.name, HTMLAttributes, 0]
-    },
-    // addKeyboardShortcuts() {
-    //     return {
-    //         'ArrowUp': (state) => {
-    //             const currentNode = this.editor.state.selection.$from.node()
-    //             if (currentNode.type.name !== this.name) {
-    //                 return false
-    //             }
-    //             // get node view
-    //             const nodeView = this.editor.view.nodeDOM(
-    //                 this.editor.state.selection.$from.pos,
-    //             )
-    //             if (!nodeView) {
-    //                 return false
-    //             }
-    //             const input = nodeView.querySelector(
-    //                 `.${clas}`,
-    //             ) as HTMLInputElement
-    //             if (input) {
-    //                 input.focus()
-    //                 return true
-    //             }
-    //             return false
-    //         },
-    //     }
-    // },
-    addAttributes() {
-        return {
             title: {
-                default: 'Title',
+                default: '',
             },
             href: {
                 default: '',
             },
-            icon: {
-                default: '',
-            },
-        }
-    },
+        },
+    }),
     addNodeView() {
         return ReactNodeViewRenderer(Component)
-    },
-    addStorage() {
-        return {
-            markdown: {
-                serialize(state: MarkdownSerializerState, node: PNode) {
-                    state.write(`<Card type="${node.attrs.type}">`)
-                    state.ensureNewLine()
-                    state.wrapBlock('    ', null, node, () =>
-                        state.renderContent(node),
-                    )
-                    state.write(`</Card>`)
-                    state.ensureNewLine()
-                },
-            },
-        }
     },
 })
 
@@ -184,6 +135,7 @@ function Component({
     )
 }
 import feather from 'feather-icons'
+import { makeExtensionConfig } from './utils'
 
 const allIcons = Object.values(feather.icons)
 

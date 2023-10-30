@@ -1,0 +1,77 @@
+import { Attributes, NodeConfig } from '@tiptap/core'
+import { Node as PNode } from 'prosemirror-model'
+
+import { MarkdownSerializerState } from 'prosemirror-markdown'
+
+export function makeExtensionConfig({
+    tagName,
+    importSource,
+    attributes,
+}: {
+    tagName: string
+    importSource?: string
+    attributes: Record<string, { default?: any }>
+}) {
+    const defaultExtensionStuff: Partial<NodeConfig> = {
+        parseHTML() {
+            return [
+                {
+                    tag: this.name,
+                },
+            ]
+        },
+        addAttributes() {
+            return attributes
+        },
+        renderHTML({ HTMLAttributes, node }) {
+            return [this.name, HTMLAttributes, 0]
+        },
+        addStorage() {
+            const attrs = Object.keys(attributes)
+            return {
+                markdown: {
+                    serialize(state: MarkdownSerializerState, node: PNode) {
+                        const props = attrs
+                            .map((attr) => {
+                                const config = attributes[attr]
+                                const v =
+                                    node.attrs[attr] ?? config.default ?? null
+                                if (v === true) {
+                                    return attr
+                                }
+                                const serialized = (() => {
+                                    if (typeof v === 'string') {
+                                        return JSON.stringify(v)
+                                    }
+                                    if (typeof v === 'number') {
+                                        return `{${v}}`
+                                    }
+                                    if (typeof v === 'boolean') {
+                                        return v ? '{true}' : '{false}'
+                                    }
+                                    if (v === null) {
+                                        return '{null}'
+                                    }
+                                    if (v === undefined) {
+                                        return '{undefined}'
+                                    }
+
+                                    return v
+                                })()
+                                return `${attr}=${serialized}`
+                            })
+                            .join(' ')
+                        state.write(`<${tagName} ${props}>`)
+                        state.ensureNewLine()
+                        state.wrapBlock('    ', null, node, () =>
+                            state.renderContent(node),
+                        )
+                        state.write(`</${tagName}>`)
+                        state.ensureNewLine()
+                    },
+                },
+            }
+        },
+    }
+    return defaultExtensionStuff
+}

@@ -8,8 +8,9 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { componentsExtensionTypes } from './constants'
+import { makeExtensionConfig } from './utils'
 
-const classes = ['note', 'warning', 'info', 'tip', 'check']
+const classes = ['note', 'warning', 'info', 'tip', 'check'] as const
 
 type CalloutType = (typeof classes)[number]
 
@@ -32,47 +33,22 @@ export function Callout({ type = 'note' as CalloutType, children }) {
     return <Info>{children}</Info>
 }
 
+const tagName = 'Callout'
 export const CalloutExtension = Node.create({
     name: componentsExtensionTypes.jsxCallout,
     group: 'block',
     content: 'block*',
     defining: true,
-
-    parseHTML() {
-        return [
-            {
-                tag: this.name,
-            },
-        ]
-    },
-    renderHTML({ HTMLAttributes, node }) {
-        return [this.name, HTMLAttributes, 0]
-    },
-
-    addAttributes() {
-        return {
+    ...makeExtensionConfig({
+        tagName,
+        attributes: {
             type: {
-                default: 'note',
+                default: 'note' satisfies CalloutType,
             },
-        }
-    },
+        },
+    }),
     addNodeView() {
         return ReactNodeViewRenderer(Component)
-    },
-    addStorage() {
-        return {
-            markdown: {
-                serialize(state: MarkdownSerializerState, node: PNode) {
-                    state.write(`<Callout type="${node.attrs.type}">`)
-                    state.ensureNewLine()
-                    state.wrapBlock('    ', null, node, () =>
-                        state.renderContent(node),
-                    )
-                    state.write(`</Callout>`)
-                    state.ensureNewLine()
-                },
-            },
-        }
     },
 })
 
