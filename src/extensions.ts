@@ -2,11 +2,13 @@ import { CalloutExtension } from './callout.extension'
 import { CardGroupExtension } from './card-group.extension'
 import { CardExtension } from './card.extension'
 import { componentsExtensionTypes } from './constants'
+import { StepsExtension } from './steps.extension'
 
 export const holocronComponentsExtensions = [
     CalloutExtension,
     CardExtension,
     CardGroupExtension,
+    StepsExtension,
 ]
 
 export const holocronTagsConfig: Record<string, { type: string }> = {
@@ -18,6 +20,9 @@ export const holocronTagsConfig: Record<string, { type: string }> = {
     },
     Callout: {
         type: componentsExtensionTypes.jsxCallout,
+    },
+    Steps: {
+        type: componentsExtensionTypes.jsxStepsGroup,
     },
 }
 

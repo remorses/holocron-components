@@ -294,10 +294,6 @@ function LinkButton({ onChange, value }) {
                     onChange(href)
                     onClose()
                 }}
-                // onClose={() => {
-                //     onClose()
-                //     setHref(value)
-                // }}
                 backdrop='opaque'
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
@@ -306,10 +302,9 @@ function LinkButton({ onChange, value }) {
                     <ModalHeader className='flex flex-col gap-1'></ModalHeader>
                     <ModalBody className='space-y-3'>
                         <div className='flex flex-col gap-3'>
-                            <div className=''>Page path</div>
+                            <div className=''>Card Link</div>
                             <Input
                                 onValueChange={setHref}
-                                // isRequired
                                 autoFocus
                                 aria-label='href'
                                 placeholder='https://x.com'
@@ -318,14 +313,6 @@ function LinkButton({ onChange, value }) {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        {/* <Button
-                            color='danger'
-                            variant='light'
-                            type='button'
-                            onPress={onClose}
-                        >
-                            Cancel
-                        </Button> */}
                         <Button color='primary' type='submit'>
                             {`Add Link`}
                         </Button>
