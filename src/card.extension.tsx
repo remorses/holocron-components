@@ -1,4 +1,9 @@
-import { Node, NodeViewProps } from '@tiptap/core'
+import {
+    Node,
+    NodeViewProps,
+    findParentNode,
+    findParentNodeClosestToPos,
+} from '@tiptap/core'
 import {
     NodeViewContent,
     NodeViewWrapper,
@@ -57,6 +62,7 @@ function Component({
     getPos,
     editor,
     deleteNode,
+
     updateAttributes,
 }: NodeViewProps) {
     const icon = node.attrs.icon
@@ -123,7 +129,28 @@ function Component({
                         isIconOnly
                         size='sm'
                         variant='ghost'
-                        onClick={deleteNode}
+                        onClick={() => {
+                            const pos = getPos()
+                            const view = editor.view
+                            const resolvedPos =
+                                editor.view.state.doc.resolve(pos)
+                            if (
+                                resolvedPos.parent.type.name !==
+                                componentsExtensionTypes.jsxCardGroup
+                            ) {
+                                return deleteNode()
+                            }
+                            if (resolvedPos.parent.childCount <= 1) {
+                                view.dispatch(
+                                    view.state.tr.delete(
+                                        resolvedPos.before(),
+                                        resolvedPos.after(),
+                                    ),
+                                )
+                            } else {
+                                deleteNode()
+                            }
+                        }}
                         className='font-medium border-0 opacity-70'
                     >
                         <IconamoonClose className='w-5' />

@@ -17,7 +17,7 @@ export const CardGroupExtension = Node.create({
     name: componentsExtensionTypes.jsxCardGroup,
     group: 'block',
     content: componentsExtensionTypes.jsxCard + '+',
-    defining: true,
+    // defining: true,
     ...makeExtensionConfig({
         tagName,
         attributes: {
