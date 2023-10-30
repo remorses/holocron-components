@@ -71,7 +71,7 @@ function Component({
     return (
         <NodeViewWrapper>
             <Card
-                className='relative non-draggable'
+                className='group relative non-draggable'
                 icon='https://em-content.zobj.net/source/apple/354/fire_1f525.png'
                 _iconElement={
                     <IconPicker
@@ -117,7 +117,7 @@ function Component({
             >
                 <div
                     contentEditable={false}
-                    className='absolute top-3 right-4 flex gap-2'
+                    className='absolute group-hover:flex hidden top-3 right-4 gap-2'
                 >
                     <LinkButton
                         onChange={(value) => {
