@@ -37,7 +37,8 @@ const tagName = 'Callout'
 export const CalloutExtension = Node.create({
     name: componentsExtensionTypes.jsxCallout,
     group: 'block',
-    content: 'paragraph*',
+    // like blockquote https://github.com/ueberdosis/tiptap/blob/252acb32d27a0f9af14813eeed83d8a50059a43a/packages/extension-blockquote/src/blockquote.ts#L38
+    content: 'paragraph+',
     defining: true,
     ...makeExtensionConfig({
         tagName,

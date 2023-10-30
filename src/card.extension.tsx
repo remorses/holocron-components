@@ -36,7 +36,7 @@ const tagName = 'Card'
 export const CardExtension = Node.create({
     name: componentsExtensionTypes.jsxCard,
     group: 'block',
-    content: 'paragraph*',
+    content: 'paragraph+',
     defining: true,
     ...makeExtensionConfig({
         tagName,
