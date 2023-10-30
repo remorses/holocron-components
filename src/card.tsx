@@ -1,5 +1,6 @@
 import { clsx } from 'clsx'
 import isAbsoluteUrl from 'is-absolute-url'
+import { Lightbulb } from 'lucide-react'
 import React, {
     ComponentPropsWithoutRef,
     ElementType,
@@ -8,6 +9,7 @@ import React, {
 } from 'react'
 
 export interface CardPropsBase<T> {
+    _iconElement?: any
     /**
      * Large title above children.
      */
@@ -44,6 +46,8 @@ export type CardProps<T extends ElementType> = CardPropsBase<T> &
 export function Card<T extends ElementType = 'div'>({
     title,
     icon,
+    _iconElement,
+
     image,
     className,
     children,
@@ -62,25 +66,13 @@ export function Card<T extends ElementType = 'div'>({
         ? { target: '_blank', rel: 'noreferrer' }
         : {}
 
-    const isImageSrc: boolean = typeof icon === 'string'
-
-    const renderIcon: JSX.Element = (
-        <>
-            {icon ? (
-                isImageSrc ? (
-                    <img
-                        src={icon as string}
-                        alt={title}
-                        className='h-6 w-6 object-cover object-center'
-                    />
-                ) : (
-                    <div className='h-6 w-6 fill-slate-800 dark:fill-slate-100 text-slate-800 dark:text-slate-100'>
-                        {icon}
-                    </div>
-                )
-            ) : null}
-        </>
-    )
+    const renderIcon =
+        _iconElement ||
+        (icon ? (
+            <div className='h-6 w-6 fill-slate-800 dark:fill-slate-100 text-slate-800 dark:text-slate-100'>
+                <img src={icon} alt={'icon'} className='w-full' />
+            </div>
+        ) : null)
 
     return (
         <Component
