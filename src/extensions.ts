@@ -9,7 +9,7 @@ export const holocronComponentsExtensions = [
     CardGroupExtension,
 ]
 
-export const tagsConfig: Record<string, { type: string }> = {
+export const holocronTagsConfig: Record<string, { type: string }> = {
     CardGroup: {
         type: componentsExtensionTypes.jsxCardGroup,
     },
@@ -20,3 +20,5 @@ export const tagsConfig: Record<string, { type: string }> = {
         type: componentsExtensionTypes.jsxCallout,
     },
 }
+
+export const holocronComponentsImportSource = '@holocron.so/components'
