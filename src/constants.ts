@@ -4,4 +4,6 @@ export const componentsExtensionTypes = {
     jsxCardGroup: 'jsxCardGroup',
     jsxStepsGroup: 'jsxStepsGroup',
     jsxStep: 'jsxStep',
+    jsxTab: 'jsxTab',
+    jsxTabGroup: 'jsxTabGroup',
 }
