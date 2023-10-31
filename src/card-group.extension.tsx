@@ -47,8 +47,8 @@ function Component({
                         variant='ghost'
                         className='border-0'
                         onClick={() => {
-                            const pos = getPos() + 1
-                            // get end position of last block
+                            const pos =
+                                getPos() + Math.max(1, node.nodeSize - 1)
 
                             editor
                                 .chain()
