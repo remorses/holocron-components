@@ -12,7 +12,7 @@ import { makeExtensionConfig } from './utils'
 
 const tagName = 'HlcCallout'
 export const CalloutExtension = Node.create({
-    name: componentsExtensionTypes.jsxCallout,
+    name: componentsExtensionTypes.callout,
     group: 'block',
     // like blockquote https://github.com/ueberdosis/tiptap/blob/252acb32d27a0f9af14813eeed83d8a50059a43a/packages/extension-blockquote/src/blockquote.ts#L38
     content: 'paragraph+',

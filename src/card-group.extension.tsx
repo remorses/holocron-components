@@ -11,9 +11,9 @@ import { makeExtensionConfig } from './utils'
 
 const tagName = 'HlcCardGroup'
 export const CardGroupExtension = Node.create({
-    name: componentsExtensionTypes.jsxCardGroup,
+    name: componentsExtensionTypes.cardGroup,
     group: 'block',
-    content: componentsExtensionTypes.jsxCard + '+',
+    content: componentsExtensionTypes.card + '+',
     // defining: true,
     ...makeExtensionConfig({
         tagName,
@@ -54,7 +54,7 @@ function Component({
                                 .chain()
                                 .focus(pos)
                                 .insertContent({
-                                    type: componentsExtensionTypes.jsxCard,
+                                    type: componentsExtensionTypes.card,
                                     content: [
                                         {
                                             type: 'paragraph',

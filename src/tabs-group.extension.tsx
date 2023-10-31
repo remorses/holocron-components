@@ -16,9 +16,9 @@ import { HlcTabs } from './tabs'
 
 const tagName = 'HlcTabGroup'
 export const TabGroupExtension = Node.create({
-    name: componentsExtensionTypes.jsxTabGroup,
+    name: componentsExtensionTypes.tabGroup,
     group: 'block',
-    content: componentsExtensionTypes.jsxTab + '+',
+    content: componentsExtensionTypes.tab + '+',
     // defining: true,
     ...makeExtensionConfig({
         tagName,
@@ -58,7 +58,7 @@ function Component({
                                 .chain()
                                 .focus(pos)
                                 .insertContent({
-                                    type: componentsExtensionTypes.jsxCard,
+                                    type: componentsExtensionTypes.card,
                                     content: [
                                         {
                                             type: 'paragraph',

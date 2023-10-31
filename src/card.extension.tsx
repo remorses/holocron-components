@@ -36,7 +36,7 @@ const tagName = 'HlcCard'
 
 
 export const CardExtension = Node.create({
-    name: componentsExtensionTypes.jsxCard,
+    name: componentsExtensionTypes.card,
     group: 'block',
     content: 'paragraph+',
     defining: true,
@@ -138,7 +138,7 @@ function Component({
                                 editor.view.state.doc.resolve(pos)
                             if (
                                 resolvedPos.parent.type.name !==
-                                componentsExtensionTypes.jsxCardGroup
+                                componentsExtensionTypes.cardGroup
                             ) {
                                 return deleteNode()
                             }

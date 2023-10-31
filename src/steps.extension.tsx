@@ -16,7 +16,7 @@ import { HlcSteps } from './steps'
 
 const tagName = 'HlcSteps'
 export const StepsExtension = Node.create({
-    name: componentsExtensionTypes.jsxStepsGroup,
+    name: componentsExtensionTypes.stepsGroup,
     group: 'block',
     content: 'block+',
     // defining: true,

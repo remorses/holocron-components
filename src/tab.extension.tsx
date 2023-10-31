@@ -36,7 +36,7 @@ const inputClass = 'tab-title-input'
 
 const tagName = 'HlcTab'
 export const TabExtension = Node.create({
-    name: componentsExtensionTypes.jsxTab,
+    name: componentsExtensionTypes.tab,
     group: 'block',
     content: 'paragraph+',
     defining: true,
@@ -104,7 +104,7 @@ function Component({
                                         editor.view.state.doc.resolve(pos)
                                     if (
                                         resolvedPos.parent.type.name !==
-                                        componentsExtensionTypes.jsxTabGroup
+                                        componentsExtensionTypes.tabGroup
                                     ) {
                                         return deleteNode()
                                     }
