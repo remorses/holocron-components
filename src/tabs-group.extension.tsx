@@ -8,13 +8,13 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { componentsExtensionTypes } from './constants'
-import { Card } from './card'
-import { CardGroup } from './card-group'
+import { HlcCard } from './card'
+import { HlcCardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
 import { Button } from '@nextui-org/react'
-import { Tabs } from './tabs'
+import { HlcTabs } from './tabs'
 
-const tagName = 'TabGroup'
+const tagName = 'HlcTabGroup'
 export const TabGroupExtension = Node.create({
     name: componentsExtensionTypes.jsxTabGroup,
     group: 'block',
@@ -44,7 +44,7 @@ function Component({
 
     return (
         <NodeViewWrapper>
-            <Tabs
+            <HlcTabs
                 _additionalTabTitle={
                     <Button
                         size='sm'
@@ -76,7 +76,7 @@ function Component({
                 }
             >
                 <NodeViewContent />
-            </Tabs>
+            </HlcTabs>
         </NodeViewWrapper>
     )
 }

@@ -1,6 +1,6 @@
 /* adds some specifity so placeholder does not show up in the editor */
-.ProseMirror .nextra-steps,
-.nextra-steps {
+.ProseMirror .hlc-steps,
+.hlc-steps {
     h1,
     h2,
     h3 {

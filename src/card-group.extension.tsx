@@ -1,19 +1,15 @@
+import { Button } from '@nextui-org/react'
 import { Node, NodeViewProps } from '@tiptap/core'
 import {
     NodeViewContent,
     NodeViewWrapper,
     ReactNodeViewRenderer,
 } from '@tiptap/react'
-import { MarkdownSerializerState } from 'prosemirror-markdown'
-import { Node as PNode } from 'prosemirror-model'
-import { Note, Tip, Warning, Check, Info } from './callout'
+import { HlcCardGroup } from './card-group'
 import { componentsExtensionTypes } from './constants'
-import { Card } from './card'
-import { CardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
-import { Button } from '@nextui-org/react'
 
-const tagName = 'CardGroup'
+const tagName = 'HlcCardGroup'
 export const CardGroupExtension = Node.create({
     name: componentsExtensionTypes.jsxCardGroup,
     group: 'block',
@@ -43,7 +39,7 @@ function Component({
 
     return (
         <NodeViewWrapper>
-            <CardGroup cols={cols}>
+            <HlcCardGroup cols={cols}>
                 <NodeViewContent />
                 <div className='flex col-span-full p-4 w-full h-full flex-col items-center justify-center'>
                     <Button
@@ -74,7 +70,7 @@ function Component({
                         Add New Card
                     </Button>
                 </div>
-            </CardGroup>
+            </HlcCardGroup>
         </NodeViewWrapper>
     )
 }

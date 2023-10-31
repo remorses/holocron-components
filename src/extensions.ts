@@ -16,16 +16,16 @@ export const holocronComponentsExtensions = [
 ]
 
 export const holocronTagsConfig: Record<string, { type: string }> = {
-    CardGroup: {
+    HlcCardGroup: {
         type: componentsExtensionTypes.jsxCardGroup,
     },
-    Card: {
+    HlcCard: {
         type: componentsExtensionTypes.jsxCard,
     },
-    Callout: {
+    HlcCallout: {
         type: componentsExtensionTypes.jsxCallout,
     },
-    Steps: {
+    HlcSteps: {
         type: componentsExtensionTypes.jsxStepsGroup,
     },
     // Tabs: {

@@ -6,34 +6,11 @@ import {
 } from '@tiptap/react'
 import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
-import { Note, Tip, Warning, Check, Info } from './callout'
+import { Note, Tip, Warning, Check, Info, HlcCalloutType, HlcCallout } from './callout'
 import { componentsExtensionTypes } from './constants'
 import { makeExtensionConfig } from './utils'
 
-const classes = ['note', 'warning', 'info', 'tip', 'check'] as const
-
-type CalloutType = (typeof classes)[number]
-
-export function Callout({ type = 'note' as CalloutType, children }) {
-    if (type === 'warning') {
-        return <Warning>{children}</Warning>
-    }
-    if (type === 'note') {
-        return <Note>{children}</Note>
-    }
-    if (type === 'info') {
-        return <Info>{children}</Info>
-    }
-    if (type === 'tip') {
-        return <Tip>{children}</Tip>
-    }
-    if (type === 'check') {
-        return <Check>{children}</Check>
-    }
-    return <Info>{children}</Info>
-}
-
-const tagName = 'Callout'
+const tagName = 'HlcCallout'
 export const CalloutExtension = Node.create({
     name: componentsExtensionTypes.jsxCallout,
     group: 'block',
@@ -44,7 +21,7 @@ export const CalloutExtension = Node.create({
         tagName,
         attributes: {
             type: {
-                default: 'note' satisfies CalloutType,
+                default: 'note' satisfies HlcCalloutType,
             },
         },
     }),
@@ -58,9 +35,9 @@ function Component({ node, updateAttributes }: NodeViewProps) {
 
     return (
         <NodeViewWrapper>
-            <Callout type={type}>
+            <HlcCallout type={type}>
                 <NodeViewContent className='' />
-            </Callout>
+            </HlcCallout>
         </NodeViewWrapper>
     )
 }

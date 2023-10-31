@@ -7,7 +7,7 @@ function Select({ className = '', children, ...rest }) {
             className={classNames(
                 'min-w-min shrink-0 rounded-lg border bg-white pr-[34px] text-sm text-gray-900 shadow-sm ring-gray-300 dark:border-0 dark:bg-gray-800',
                 'block cursor-pointer appearance-none px-3',
-                ' focus:ring-blue-500 dark:text-white dark:ring-gray-700',
+                'focus:ring-blue-500 dark:text-white dark:ring-gray-700',
                 'dark:placeholder-gray-400 dark:focus:ring-blue-500',
                 'py-[0.2em]',
                 className,

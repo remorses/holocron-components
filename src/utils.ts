@@ -31,7 +31,7 @@ export function makeExtensionConfig({
             return {
                 markdown: {
                     serialize(state: MarkdownSerializerState, node: PNode) {
-                        const props = attrs
+                        let props = attrs
                             .map((attr) => {
                                 const config = attributes[attr]
                                 const v =
@@ -61,6 +61,9 @@ export function makeExtensionConfig({
                                 return `${attr}=${serialized}`
                             })
                             .join(' ')
+                        if (node.attrs._additionalProps) {
+                            props += ' ' + node.attrs._additionalProps
+                        }
                         state.write(`<${tagName} ${props}>`)
                         state.ensureNewLine()
                         state.wrapBlock('    ', null, node, () =>

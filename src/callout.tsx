@@ -8,6 +8,29 @@ type CalloutProps = {
     childrenClassName: string
 }
 
+const classes = ['note', 'warning', 'info', 'tip', 'check'] as const
+
+export type HlcCalloutType = (typeof classes)[number]
+
+export function HlcCallout({ type = 'note' as HlcCalloutType, children }) {
+    if (type === 'warning') {
+        return <Warning>{children}</Warning>
+    }
+    if (type === 'note') {
+        return <Note>{children}</Note>
+    }
+    if (type === 'info') {
+        return <Info>{children}</Info>
+    }
+    if (type === 'tip') {
+        return <Tip>{children}</Tip>
+    }
+    if (type === 'check') {
+        return <Check>{children}</Check>
+    }
+    return <Info>{children}</Info>
+}
+
 function CalloutTemplate({
     children,
     icon,

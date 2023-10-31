@@ -13,7 +13,7 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { componentsExtensionTypes } from './constants'
-import { Card } from './card'
+import { HlcCard } from './card'
 import {
     Button,
     Input,
@@ -29,12 +29,12 @@ import {
 } from '@nextui-org/react'
 import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { Tab } from './tabs'
+import { HlcTab } from './tabs'
 import { makeExtensionConfig } from './utils'
 
 const inputClass = 'tab-title-input'
 
-const tagName = 'Tab'
+const tagName = 'HlcTab'
 export const TabExtension = Node.create({
     name: componentsExtensionTypes.jsxTab,
     group: 'block',
@@ -66,7 +66,7 @@ function Component({
     const inputRef = useRef<HTMLInputElement>(null)
     return (
         <NodeViewWrapper>
-            <Tab
+            <HlcTab
                 className='group relative non-draggable'
                 title={
                     <div className='relative'>
@@ -128,7 +128,7 @@ function Component({
                 }
             >
                 <NodeViewContent className='' />
-            </Tab>
+            </HlcTab>
         </NodeViewWrapper>
     )
 }

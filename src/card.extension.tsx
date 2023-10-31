@@ -13,7 +13,7 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { componentsExtensionTypes } from './constants'
-import { Card } from './card'
+import { HlcCard } from './card'
 import {
     Button,
     Input,
@@ -32,7 +32,9 @@ import clsx from 'clsx'
 
 const inputClass = 'card-title-input'
 
-const tagName = 'Card'
+const tagName = 'HlcCard'
+
+
 export const CardExtension = Node.create({
     name: componentsExtensionTypes.jsxCard,
     group: 'block',
@@ -70,7 +72,7 @@ function Component({
     const inputRef = useRef<HTMLInputElement>(null)
     return (
         <NodeViewWrapper>
-            <Card
+            <HlcCard
                 className='group relative non-draggable'
                 icon='https://em-content.zobj.net/source/apple/354/fire_1f525.png'
                 _iconElement={
@@ -157,7 +159,7 @@ function Component({
                     </Button>
                 </div>
                 <NodeViewContent className='' />
-            </Card>
+            </HlcCard>
         </NodeViewWrapper>
     )
 }

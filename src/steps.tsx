@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 
-export function Steps({
+export function HlcSteps({
     children,
     className,
     ...props
@@ -9,7 +9,7 @@ export function Steps({
     return (
         <div
             className={cn(
-                'nextra-steps ml-4 mb-8 border-l border-gray-200 pl-7',
+                'hlc-steps ml-4 mb-8 border-l border-gray-200 pl-7',
                 'dark:border-neutral-800 [counter-reset:step]',
                 className,
             )}

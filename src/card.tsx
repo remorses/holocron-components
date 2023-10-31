@@ -1,7 +1,6 @@
 import { clsx } from 'clsx'
 import isAbsoluteUrl from 'is-absolute-url'
-import { Lightbulb } from 'lucide-react'
-import React, {
+import {
     ComponentPropsWithoutRef,
     ElementType,
     ReactNode,
@@ -43,7 +42,7 @@ export interface CardPropsBase<T> {
 export type CardProps<T extends ElementType> = CardPropsBase<T> &
     Omit<ComponentPropsWithoutRef<T>, keyof CardPropsBase<T>>
 
-export function Card<T extends ElementType = 'div'>({
+export function HlcCard<T extends ElementType = 'div'>({
     title,
     icon,
     _iconElement,
