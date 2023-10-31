@@ -6,6 +6,7 @@
     "type": "module",
     "exports": {
         "./package.json": "./package.json",
+        "./styles.css": "./dist/styles.css",
         ".": {
             "types": "./dist/index.d.ts",
             "default": "./dist/index.js"
