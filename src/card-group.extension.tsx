@@ -39,9 +39,9 @@ function Component({
 
     return (
         <NodeViewWrapper>
-            <HlcCardGroup cols={cols}>
+            <HlcCardGroup className='relative' cols={cols}>
                 <NodeViewContent />
-                <div className='flex col-span-full p-4 w-full h-full flex-col items-center justify-center'>
+                <div className='absolute right-2 bottom-2 flex col-span-full p-4 flex-col '>
                     <Button
                         size='sm'
                         variant='ghost'
