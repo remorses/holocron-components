@@ -12,6 +12,7 @@
             "default": "./dist/index.js"
         },
         "./src/constants": "./src/constants.ts",
+        "./src/utils": "./src/utils.ts",
         "./src/extensions": "./src/extensions.ts"
     },
     "repository": "https://github.com/remorses/holocron-components",

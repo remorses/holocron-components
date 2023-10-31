@@ -14,26 +14,17 @@ export const holocronComponentsExtensions = [
     // TabExtension,
     // TabGroupExtension,
 ]
+export const holocronTagsConfig: Record<
+    string,
+    { type: string; attributes: Record<string, { default?: any }> }
+> = Object.fromEntries(
+    holocronComponentsExtensions.map((ext) => {
+        const type = ext.config.name
+        const tagName = ext.config._tagName
+        let attributes = ext.config?._attributes ?? {}
 
-export const holocronTagsConfig: Record<string, { type: string }> = {
-    HlcCardGroup: {
-        type: componentsExtensionTypes.jsxCardGroup,
-    },
-    HlcCard: {
-        type: componentsExtensionTypes.jsxCard,
-    },
-    HlcCallout: {
-        type: componentsExtensionTypes.jsxCallout,
-    },
-    HlcSteps: {
-        type: componentsExtensionTypes.jsxStepsGroup,
-    },
-    // Tabs: {
-    //     type: componentsExtensionTypes.jsxTabGroup,
-    // },
-    // Tab: {
-    //     type: componentsExtensionTypes.jsxTab,
-    // },
-}
+        return [tagName, { type, attributes }]
+    }),
+)
 
 export const holocronComponentsImportSource = '@holocron.so/components'

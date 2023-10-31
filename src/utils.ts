@@ -13,6 +13,8 @@ export function makeExtensionConfig({
     attributes: Record<string, { default?: any }>
 }) {
     const defaultExtensionStuff: Partial<NodeConfig> = {
+        _tagName: tagName,
+        _attributes: attributes,
         parseHTML() {
             return [
                 {
@@ -21,7 +23,7 @@ export function makeExtensionConfig({
             ]
         },
         addAttributes() {
-            return attributes
+            return { ...attributes, _additionalProps: { default: '' } }
         },
         renderHTML({ HTMLAttributes, node }) {
             return [this.name, HTMLAttributes, 0]
@@ -39,25 +41,7 @@ export function makeExtensionConfig({
                                 if (v === true) {
                                     return attr
                                 }
-                                const serialized = (() => {
-                                    if (typeof v === 'string') {
-                                        return JSON.stringify(v)
-                                    }
-                                    if (typeof v === 'number') {
-                                        return `{${v}}`
-                                    }
-                                    if (typeof v === 'boolean') {
-                                        return v ? '{true}' : '{false}'
-                                    }
-                                    if (v === null) {
-                                        return '{null}'
-                                    }
-                                    if (v === undefined) {
-                                        return '{undefined}'
-                                    }
-
-                                    return v
-                                })()
+                                const serialized = serializePropValue(v)
                                 return `${attr}=${serialized}`
                             })
                             .join(' ')
@@ -82,4 +66,24 @@ export function makeExtensionConfig({
         },
     }
     return defaultExtensionStuff
+}
+
+export function serializePropValue(v) {
+    if (typeof v === 'string') {
+        return JSON.stringify(v)
+    }
+    if (typeof v === 'number') {
+        return `{${v}}`
+    }
+    if (typeof v === 'boolean') {
+        return v ? '{true}' : '{false}'
+    }
+    if (v === null) {
+        return '{null}'
+    }
+    if (v === undefined) {
+        return '{undefined}'
+    }
+    console.warn('WARNING unknown prop value type', v)
+    return `{${v}}`
 }
