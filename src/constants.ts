@@ -1,8 +1,8 @@
 export const componentsExtensionTypes = {
-    jsxCallout: 'jsxCallout',
-    jsxCard: 'jsxCard',
-    jsxCardGroup: 'jsxCardGroup',
-    jsxStepsGroup: 'jsxStepsGroup',
-    jsxTab: 'jsxTab',
-    jsxTabGroup: 'jsxTabGroup',
+    callout: 'hlcCallout',
+    card: 'hlcCard',
+    cardGroup: 'hlcCardGroup',
+    stepsGroup: 'hlcStepsGroup',
+    tab: 'hlcTab',
+    tabGroup: 'hlcTabGroup',
 }
