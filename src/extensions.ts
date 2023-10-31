@@ -11,8 +11,8 @@ export const holocronComponentsExtensions = [
     CardExtension,
     CardGroupExtension,
     StepsExtension,
-    TabExtension,
-    TabGroupExtension,
+    // TabExtension,
+    // TabGroupExtension,
 ]
 
 export const holocronTagsConfig: Record<string, { type: string }> = {
@@ -28,12 +28,12 @@ export const holocronTagsConfig: Record<string, { type: string }> = {
     Steps: {
         type: componentsExtensionTypes.jsxStepsGroup,
     },
-    Tabs: {
-        type: componentsExtensionTypes.jsxTabGroup,
-    },
-    Tab: {
-        type: componentsExtensionTypes.jsxTab,
-    },
+    // Tabs: {
+    //     type: componentsExtensionTypes.jsxTabGroup,
+    // },
+    // Tab: {
+    //     type: componentsExtensionTypes.jsxTab,
+    // },
 }
 
 export const holocronComponentsImportSource = '@holocron.so/components'

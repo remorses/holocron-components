@@ -66,6 +66,9 @@ export function makeExtensionConfig({
                         state.wrapBlock('    ', null, node, () =>
                             state.renderContent(node),
                         )
+                        // flushClose(1) prevents write() from adding a \n if previous block is closed
+                        // @ts-ignore
+                        state.flushClose(1)
                         state.write(`</${tagName}>\n`)
                         if (!state['delim']) {
                             state.write('\n')
