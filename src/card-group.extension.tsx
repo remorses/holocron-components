@@ -6,14 +6,14 @@ import {
     ReactNodeViewRenderer,
 } from '@tiptap/react'
 import { HlcCardGroup } from './card-group'
-import { componentsExtensionTypes } from './constants'
+import { holocronExtensionTypes } from './constants'
 import { makeExtensionConfig } from './utils'
 
 const tagName = 'HlcCardGroup'
 export const CardGroupExtension = Node.create({
-    name: componentsExtensionTypes.cardGroup,
+    name: holocronExtensionTypes.cardGroup,
     group: 'block',
-    content: componentsExtensionTypes.card + '+',
+    content: holocronExtensionTypes.card + '+',
     // defining: true,
     ...makeExtensionConfig({
         tagName,
@@ -54,7 +54,7 @@ function Component({
                                 .chain()
                                 .focus(pos)
                                 .insertContent({
-                                    type: componentsExtensionTypes.card,
+                                    type: holocronExtensionTypes.card,
                                     content: [
                                         {
                                             type: 'paragraph',

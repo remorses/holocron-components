@@ -1,4 +1,4 @@
-export const componentsExtensionTypes = {
+export const holocronExtensionTypes = {
     callout: 'hlcCallout',
     card: 'hlcCard',
     cardGroup: 'hlcCardGroup',

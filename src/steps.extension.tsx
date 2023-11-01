@@ -7,7 +7,7 @@ import {
 import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
-import { componentsExtensionTypes } from './constants'
+import { holocronExtensionTypes } from './constants'
 import { HlcCard } from './card'
 import { HlcCardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
@@ -16,7 +16,7 @@ import { HlcSteps } from './steps'
 
 const tagName = 'HlcSteps'
 export const StepsExtension = Node.create({
-    name: componentsExtensionTypes.stepsGroup,
+    name: holocronExtensionTypes.stepsGroup,
     group: 'block',
     content: 'block+',
     // defining: true,

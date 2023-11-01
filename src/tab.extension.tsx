@@ -12,7 +12,7 @@ import {
 import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
-import { componentsExtensionTypes } from './constants'
+import { holocronExtensionTypes } from './constants'
 import { HlcCard } from './card'
 import {
     Button,
@@ -36,7 +36,7 @@ const inputClass = 'tab-title-input'
 
 const tagName = 'HlcTab'
 export const TabExtension = Node.create({
-    name: componentsExtensionTypes.tab,
+    name: holocronExtensionTypes.tab,
     group: 'block',
     content: 'paragraph+',
     defining: true,
@@ -104,7 +104,7 @@ function Component({
                                         editor.view.state.doc.resolve(pos)
                                     if (
                                         resolvedPos.parent.type.name !==
-                                        componentsExtensionTypes.tabGroup
+                                        holocronExtensionTypes.tabGroup
                                     ) {
                                         return deleteNode()
                                     }

@@ -1,7 +1,7 @@
 import { CalloutExtension } from './callout.extension'
 import { CardGroupExtension } from './card-group.extension'
 import { CardExtension } from './card.extension'
-import { componentsExtensionTypes } from './constants'
+import { holocronExtensionTypes } from './constants'
 import { StepsExtension } from './steps.extension'
 import { TabExtension } from './tab.extension'
 import { TabGroupExtension } from './tabs-group.extension'

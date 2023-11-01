@@ -7,7 +7,7 @@ import {
 import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
-import { componentsExtensionTypes } from './constants'
+import { holocronExtensionTypes } from './constants'
 import { HlcCard } from './card'
 import { HlcCardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
@@ -16,9 +16,9 @@ import { HlcTabs } from './tabs'
 
 const tagName = 'HlcTabGroup'
 export const TabGroupExtension = Node.create({
-    name: componentsExtensionTypes.tabGroup,
+    name: holocronExtensionTypes.tabGroup,
     group: 'block',
-    content: componentsExtensionTypes.tab + '+',
+    content: holocronExtensionTypes.tab + '+',
     // defining: true,
     ...makeExtensionConfig({
         tagName,
@@ -58,7 +58,7 @@ function Component({
                                 .chain()
                                 .focus(pos)
                                 .insertContent({
-                                    type: componentsExtensionTypes.card,
+                                    type: holocronExtensionTypes.card,
                                     content: [
                                         {
                                             type: 'paragraph',

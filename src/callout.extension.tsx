@@ -7,12 +7,12 @@ import {
 import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info, HlcCalloutType, HlcCallout } from './callout'
-import { componentsExtensionTypes } from './constants'
+import { holocronExtensionTypes } from './constants'
 import { makeExtensionConfig } from './utils'
 
 const tagName = 'HlcCallout'
 export const CalloutExtension = Node.create({
-    name: componentsExtensionTypes.callout,
+    name: holocronExtensionTypes.callout,
     group: 'block',
     // like blockquote https://github.com/ueberdosis/tiptap/blob/252acb32d27a0f9af14813eeed83d8a50059a43a/packages/extension-blockquote/src/blockquote.ts#L38
     content: 'paragraph+',
