@@ -1,11 +1,6 @@
 import { clsx } from 'clsx'
 import isAbsoluteUrl from 'is-absolute-url'
-import {
-    ComponentPropsWithoutRef,
-    ElementType,
-    ReactNode,
-    Ref,
-} from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode, Ref } from 'react'
 
 export interface CardPropsBase<T> {
     _iconElement?: any
@@ -42,6 +37,35 @@ export interface CardPropsBase<T> {
 export type CardProps<T extends ElementType> = CardPropsBase<T> &
     Omit<ComponentPropsWithoutRef<T>, keyof CardPropsBase<T>>
 
+export function Icon({ icon }) {
+    if (!icon) {
+        return null
+    }
+    if (isUrl(icon)) {
+        return (
+            <div contentEditable={false} className='shrink-0 h-6 w-6 '>
+                <img src={icon} alt={''} className='dark:invert w-full' />
+            </div>
+        )
+    }
+    const isEmoji = icon.length === 1
+    if (isEmoji) {
+        return (
+            <div
+                contentEditable={false}
+                className='shrink-0 h-6 w-6 fill-slate-800 dark:fill-slate-100 text-slate-800 dark:text-slate-100'
+            >
+                {icon}
+            </div>
+        )
+    }
+    return <div contentEditable={false} className='shrink-0 select-none h-6 w-6' />
+}
+
+function isUrl(str: string) {
+    return str.startsWith('http://') || str.startsWith('https://')
+}
+
 export function HlcCard<T extends ElementType = 'div'>({
     title,
     icon,
@@ -65,13 +89,7 @@ export function HlcCard<T extends ElementType = 'div'>({
         ? { target: '_blank', rel: 'noreferrer' }
         : {}
 
-    const renderIcon =
-        _iconElement ||
-        (icon ? (
-            <div className='h-6 w-6 fill-slate-800 dark:fill-slate-100 text-slate-800 dark:text-slate-100'>
-                <img src={icon} alt={'icon'} className='w-full' />
-            </div>
-        ) : null)
+    const renderIcon = _iconElement || <Icon icon={icon} />
 
     return (
         <Component

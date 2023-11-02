@@ -4,6 +4,7 @@ import {
     findParentNode,
     findParentNodeClosestToPos,
 } from '@tiptap/core'
+
 import {
     NodeViewContent,
     NodeViewWrapper,
@@ -13,7 +14,7 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { holocronExtensionTypes } from './constants'
-import { HlcCard } from './card'
+import { HlcCard, Icon } from './card'
 import {
     Button,
     Dropdown,
@@ -29,11 +30,18 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
+    Tab,
+    Tabs,
     useDisclosure,
 } from '@nextui-org/react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
 
+import { makeExtensionConfig } from './utils'
+import memoize from 'micro-memoize'
+
+let iconUrlProvider = `https://holocron.so/icon`
+// iconUrlProvider = `https://api.iconify.design`
 const inputClass = 'card-title-input'
 
 const tagName = 'HlcCard'
@@ -71,13 +79,13 @@ function Component({
     updateAttributes,
 }: NodeViewProps) {
     const icon = node.attrs.icon
-    const found = feather.icons[icon] || feather.icons['alert-circle']
+
     const inputRef = useRef<HTMLInputElement>(null)
     return (
         <NodeViewWrapper>
             <HlcCard
                 className='group relative non-draggable'
-                icon='https://em-content.zobj.net/source/apple/354/fire_1f525.png'
+                icon={icon}
                 _iconElement={
                     <IconPicker
                         value={icon}
@@ -85,11 +93,7 @@ function Component({
                             updateAttributes({ icon })
                         }}
                     >
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: found?.toSvg() || '',
-                            }}
-                        />
+                        <Icon icon={icon} />
                     </IconPicker>
                 }
                 title={
@@ -166,20 +170,66 @@ function Component({
         </NodeViewWrapper>
     )
 }
-import feather from 'feather-icons'
-import { makeExtensionConfig } from './utils'
 
-const allIcons = Object.values(feather.icons)
+function parseIconUrl(url: string) {
+    if (!url) {
+        return {}
+    }
+    if (!url.startsWith(`${iconUrlProvider}/`)) {
+        return {}
+    }
+    const u = new URL(url)
+    const parts = u.pathname.split('/')
+    // fe:activity.svg
+    const iconKey = parts[parts.length - 1]
+    if (!iconKey) {
+        return {}
+    }
+    let [namespace, name] = iconKey.split(':')
+    name = name.replace('.svg', '')
+    return { namespace, name }
+}
+
+function iconUrl({ name, namespace }) {
+    return `${iconUrlProvider}/${namespace}:${name}.svg`
+}
+
+const iconsMeta = {
+    lucide: { import: memoize(() => import('@iconify-json/lucide')) },
+    // https://api.iconify.design/simple-icons:1001tracklists.svg?color=%23888888
+    'simple-icons': {
+        import: memoize(() => import('@iconify-json/simple-icons')),
+        title: 'brand icons',
+    },
+}
+
+const namespaces = Object.keys(iconsMeta)
 
 function IconPicker({ children, value, onChange }) {
+    // https://api.iconify.design/fe:activity.svg?color=%23888888
+    const parsed = parseIconUrl(value)
+    const [namespace, setNamespace] = useState(namespaces[0])
+    const [allIcons, setIcons] =
+        useState<typeof import('@iconify-json/lucide')>()
+    useEffect(() => {
+        setLoading(true)
+        iconsMeta[namespace]?.import?.().then((icons) => {
+            setIcons(icons)
+            setLoading(false)
+        })
+    }, [namespace])
     const [search, setSearch] = useState('')
+    const [loading, setLoading] = useState(false)
     const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure()
-    let icons = allIcons.filter((icon) => {
-        if (!search) {
-            return true
-        }
-        return icon.name.includes(search)
-    })
+    // console.log(allIcons)
+    let icons = useMemo(() => {
+        return Object.keys(allIcons?.icons?.icons || {}).filter((icon) => {
+            if (!search) {
+                return true
+            }
+            return icon.includes(search)
+        })
+    }, [search, namespace, allIcons])
     useEffect(() => {
         if (!isOpen) {
             setSearch('')
@@ -187,7 +237,7 @@ function IconPicker({ children, value, onChange }) {
         if (isOpen) {
             setTimeout(() => inputRef.current?.focus(), 10)
         }
-    }, [isOpen])
+    }, [isOpen, namespace])
     const inputRef = useRef<any>(null)
 
     return (
@@ -208,12 +258,31 @@ function IconPicker({ children, value, onChange }) {
                 onClick={onOpen}
                 className='cursor-pointer p-1 -m-1 dark:hover:bg-gray-800 rounded max-w-max'
             >
-                {children}
+                <div className=''>{children}</div>
             </PopoverTrigger>
             <PopoverContent
                 contentEditable={false}
                 className='flex min-w-[300px] flex-col gap-3 p-2'
             >
+                <Tabs
+                    isDisabled={loading}
+                    onSelectionChange={(x) => setNamespace(x.toString())}
+                    selectedKey={namespace}
+                    
+                    className='w-full max-w-[300px]'
+                >
+                    {namespaces.map((ns) => {
+                        return (
+                            <Tab
+                                onSelect={() => {
+                                    setNamespace(ns)
+                                }}
+                                key={ns}
+                                title={iconsMeta[ns]?.title || ns}
+                            ></Tab>
+                        )
+                    })}
+                </Tabs>
                 <Input
                     size='sm'
                     ref={inputRef}
@@ -228,22 +297,39 @@ function IconPicker({ children, value, onChange }) {
                 <div className='overflow-y-auto w-full h-[300px]'>
                     <div className='grid grid-cols-6 pr-2 justify-start items-start gap-1 '>
                         {icons.map((icon) => {
+                            const sameIcon =
+                                parsed.namespace === namespace &&
+                                parsed.name === icon
+
+                            const body =
+                                allIcons?.icons?.icons?.[icon]?.body || ''
+                            const h = allIcons?.icons?.height
+                            const w = allIcons?.icons?.width
                             return (
                                 <button
-                                    key={icon.name}
+                                    key={icon}
                                     onClick={() => {
-                                        onChange(icon.name)
+                                        onChange(
+                                            iconUrl({
+                                                name: icon,
+                                                namespace,
+                                            }),
+                                        )
                                         onClose()
                                     }}
                                     className={clsx(
                                         'appearance-none shrink-0 w-9 h-9 flex flex-col p-1 rounded items-center justify-center gap-1 text-center',
-                                        value === icon.name &&
+                                        sameIcon &&
                                             'bg-gray-200 dark:bg-gray-700',
                                     )}
                                 >
-                                    <div
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        // width='1em'
+                                        // height='1em'
+                                        viewBox={`0 0 ${h} ${w}`}
                                         dangerouslySetInnerHTML={{
-                                            __html: icon.toSvg(),
+                                            __html: body,
                                         }}
                                     />
                                 </button>

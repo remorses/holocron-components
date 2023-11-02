@@ -29,30 +29,21 @@
     "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
     "license": "",
     "dependencies": {
-        "@nextui-org/react": "^2.1.13",
-        "@nextui-org/theme": "^2.1.9",
         "clsx": "^2.0.0",
-        "feather-icons": "^4.29.1",
-        "is-absolute-url": "^4.0.1"
-    },
-    "peerDependenciesMeta": {
-        "winston": {
-            "prosemirror-model": true,
-            "@tiptap/core": true,
-            "@tiptap/react": true
-        }
+        "is-absolute-url": "^4.0.1",
+        "micro-memoize": "^4.1.2"
     },
     "peerDependencies": {
-        "@tiptap/core": "^2.1.12",
-        "@tiptap/react": "^2.1.12",
-        "prosemirror-model": "*",
         "react": "*",
         "react-dom": "*"
     },
     "devDependencies": {
+        "@iconify-json/lucide": "^1.1.139",
+        "@iconify-json/simple-icons": "^1.1.76",
+        "@nextui-org/react": "^2.1.13",
+        "@nextui-org/theme": "^2.1.9",
         "@tiptap/core": "^2.1.12",
         "@tiptap/react": "^2.1.12",
-        "@types/feather-icons": "^4.29.3",
         "@types/react": "18.2.23",
         "prosemirror-markdown": "^1.11.2",
         "prosemirror-model": "^1.19.3",
