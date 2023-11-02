@@ -122,7 +122,7 @@ function Component({
             >
                 <div
                     contentEditable={false}
-                    className='absolute group-hover:flex hidden top-3 right-4 gap-2'
+                    className='absolute transition-opacity group-hover:opacity-100 opacity-0 top-3 right-4 gap-2'
                 >
                     <LinkButton
                         onChange={(value) => {
@@ -282,8 +282,11 @@ function LinkButton({ onChange, value }) {
     return (
         <>
             <Dropdown
-                // backdrop='opaque' //
+                backdrop='opaque' //
+                shouldBlockScroll
+                triggerScaleOnOpen={false}
                 onClose={dropdownOpenChange}
+                triggerType='menu'
                 isOpen={dropdownOpen}
             >
                 <DropdownTrigger
