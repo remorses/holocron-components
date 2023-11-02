@@ -16,6 +16,10 @@ import { holocronExtensionTypes } from './constants'
 import { HlcCard } from './card'
 import {
     Button,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownTrigger,
     Input,
     Modal,
     ModalBody,
@@ -33,7 +37,6 @@ import clsx from 'clsx'
 const inputClass = 'card-title-input'
 
 const tagName = 'HlcCard'
-
 
 export const CardExtension = Node.create({
     name: holocronExtensionTypes.card,
@@ -267,28 +270,67 @@ export function MaterialSymbolsSearchRounded(props) {
 function LinkButton({ onChange, value }) {
     const [href, setHref] = useState(value)
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure()
+    const { isOpen: dropdownOpen, onOpenChange: dropdownOpenChange } =
+        useDisclosure()
     useEffect(() => {
         setHref(value)
     }, [isOpen])
+    const [absUrl, setAbsUrl] = useState('')
+    useEffect(() => {
+        setAbsUrl(absoluteUrl(value))
+    }, [value])
     return (
         <>
-            <Button
-                isIconOnly
-                size='sm'
-                variant='ghost'
-                onClick={(e) => {
-                    e.stopPropagation()
-                    onOpen()
-                }}
-                className='font-medium border-0 '
+            <Dropdown
+                // backdrop='opaque' //
+                onOpenChange={dropdownOpenChange}
+                isOpen={dropdownOpen}
             >
-                <MaterialSymbolsAddLink
-                    className={clsx(
-                        'w-5',
-                        value ? 'dark:text-blue-200 font-bold' : 'opacity-70',
-                    )}
-                />
-            </Button>
+                <DropdownTrigger
+                    onClick={(e) => {
+                        if (!value) {
+                            e.stopPropagation()
+                            return
+                        }
+                    }}
+                >
+                    <Button
+                        isIconOnly
+                        size='sm'
+                        variant='ghost'
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            if (!value) {
+                                onOpen()
+                            }
+                        }}
+                        className='font-medium border-0 '
+                    >
+                        <MaterialSymbolsAddLink
+                            className={clsx(
+                                'w-5',
+                                value
+                                    ? 'dark:text-blue-200 font-bold'
+                                    : 'opacity-70',
+                            )}
+                        />
+                    </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label='Link Actions'>
+                    <DropdownItem
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            onOpen()
+                        }}
+                        key='copy'
+                    >
+                        Edit Link
+                    </DropdownItem>
+                    <DropdownItem key='new'>
+                        <a href={absUrl}>Go To Link</a>
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
             <Modal
                 as='form'
                 onSubmit={(e) => {
@@ -323,6 +365,22 @@ function LinkButton({ onChange, value }) {
             </Modal>
         </>
     )
+}
+
+function absoluteUrl(url: string) {
+    if (!url) {
+        return ''
+    }
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url
+    }
+    if (url.startsWith('/')) {
+        return `${window.location.origin}${url}`
+    }
+    if (url.startsWith('mailto:')) {
+        return url
+    }
+    return new URL(url, window.location.href).toString()
 }
 
 export function IconamoonClose(props) {
