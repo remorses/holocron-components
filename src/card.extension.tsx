@@ -283,15 +283,16 @@ function LinkButton({ onChange, value }) {
         <>
             <Dropdown
                 // backdrop='opaque' //
-                onOpenChange={dropdownOpenChange}
+                onClose={dropdownOpenChange}
                 isOpen={dropdownOpen}
             >
                 <DropdownTrigger
                     onClick={(e) => {
                         if (!value) {
-                            e.stopPropagation()
+                            e.preventDefault()
                             return
                         }
+                        dropdownOpenChange()
                     }}
                 >
                     <Button

@@ -76,7 +76,7 @@ export function HlcCard<T extends ElementType = 'div'>({
     return (
         <Component
             className={clsx(
-                'block font-normal group relative my-2 ring-2 ring-transparent rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden w-full',
+                'block font-normal group relative my-2 ring-2 ring-inset ring-transparent rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden w-full',
                 props.href && 'cursor-pointer',
                 className,
             )}
