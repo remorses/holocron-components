@@ -3,8 +3,8 @@
     <br/>
     <br/>
     <h3>@holocron.so/components</h3>
-    <p>Components for your MDX files</p>
-    <p>Visually editable with Holocron WYSIWYG editor</p>
+    <p>Components for your MDX files, visually editable with Holocron WYSIWYG editor</p>
+    <p>Still experimental, do not use</p>
     <br/>
     <br/>
 </div>
