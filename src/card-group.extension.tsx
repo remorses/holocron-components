@@ -40,7 +40,7 @@ function Component({
     return (
         <NodeViewWrapper>
             <HlcCardGroup className='relative' cols={cols}>
-                <NodeViewContent />
+                <NodeViewContent className='contents [&>div]:contents' />
                 <div className='absolute right-2 bottom-2 flex col-span-full p-4 flex-col '>
                     <Button
                         size='sm'

@@ -59,7 +59,9 @@ export function Icon({ icon }) {
             </div>
         )
     }
-    return <div contentEditable={false} className='shrink-0 select-none h-6 w-6' />
+    return (
+        <div contentEditable={false} className='shrink-0 select-none h-6 w-6' />
+    )
 }
 
 function isUrl(str: string) {
@@ -114,14 +116,14 @@ export function HlcCard<T extends ElementType = 'div'>({
             <div className='px-6 not-prose py-5'>
                 {renderIcon}
 
-                <h2
+                <div
                     className={clsx(
-                        'font-semibold text-base text-slate-800 dark:text-white',
+                        'font-semibold block text-base text-slate-800 dark:text-white',
                         icon !== null && icon !== undefined && 'mt-4',
                     )}
                 >
                     {title}
-                </h2>
+                </div>
 
                 <div
                     className={clsx(
