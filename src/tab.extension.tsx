@@ -71,7 +71,6 @@ function Component({
                 title={
                     <div className='relative'>
                         <input
-                            contentEditable={true}
                             className={clsx(
                                 'appearance-none focus:outline-none not-prose bg-transparent w-full',
                                 inputClass,

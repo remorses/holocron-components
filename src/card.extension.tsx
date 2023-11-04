@@ -98,7 +98,6 @@ function Component({
                 }
                 title={
                     <input
-                        contentEditable={true}
                         className={clsx(
                             'appearance-none focus:outline-none not-prose bg-transparent w-full',
                             inputClass,
@@ -268,7 +267,6 @@ function IconPicker({ children, value, onChange }) {
                     isDisabled={loading}
                     onSelectionChange={(x) => setNamespace(x.toString())}
                     selectedKey={namespace}
-                    
                     className='w-full max-w-[300px]'
                 >
                     {namespaces.map((ns) => {
