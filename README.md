@@ -43,12 +43,30 @@ import '@holocron.so/components/styles.css'
 
 ## Using the components in MDX
 
-```mdx
-import { HlcCallout } from '@holocron.so/components'
+First add the `Holocron` namespace to your MDX components
 
+```ts
+// mdx-components.jsx
+import '@holocron.so/components/styles.css'
+
+import * as Holocron from '@holocron.so/components/src'
+
+export function useMDXComponents(components) {
+    return {
+        ...components,
+        Holocron,
+    }
+}
+```
+
+```mdx
 # MDX file
 
-<HlcCallout type='info'>This is a callout</HlcCallout>
+<Holocron.Callout type='info'>
+
+This is a callout
+
+</Holocron.Callout>
 ```
 
 > You can also expose the components globally in your MDX files for easier access
@@ -56,5 +74,3 @@ import { HlcCallout } from '@holocron.so/components'
 ## Why the `Holocron` namespace?
 
 The Holocron editor automatically detects the components with the `Holocron` namespace and allows you to edit your MDX files visually in a WYSIWYG editor.
-
-
