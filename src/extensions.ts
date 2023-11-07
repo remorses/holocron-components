@@ -14,6 +14,8 @@ export const holocronComponentsExtensions = [
     // TabExtension,
     // TabGroupExtension,
 ]
+
+const namespace = 'Holocron'
 export const holocronTagsConfig: Record<
     string,
     { type: string; attributes: Record<string, { default?: any }> }
@@ -23,7 +25,7 @@ export const holocronTagsConfig: Record<
         const tagName = ext.config._tagName
         let attributes = ext.config?._attributes ?? {}
 
-        return [tagName, { type, attributes }]
+        return [`${namespace}.${tagName}`, { type, attributes }]
     }),
 )
 

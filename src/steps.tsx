@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement } from 'react'
 
-export function HlcSteps({
+export function Steps({
     children,
     className,
     ...props

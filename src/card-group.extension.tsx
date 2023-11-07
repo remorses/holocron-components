@@ -5,11 +5,11 @@ import {
     NodeViewWrapper,
     ReactNodeViewRenderer,
 } from '@tiptap/react'
-import { HlcCardGroup } from './card-group'
+import { CardGroup } from './card-group'
 import { holocronExtensionTypes } from './constants'
 import { makeExtensionConfig } from './utils'
 
-const tagName = 'HlcCardGroup'
+const tagName = 'CardGroup'
 export const CardGroupExtension = Node.create({
     name: holocronExtensionTypes.cardGroup,
     group: 'block',
@@ -39,7 +39,7 @@ function Component({
 
     return (
         <NodeViewWrapper>
-            <HlcCardGroup className='relative' cols={cols}>
+            <CardGroup className='relative' cols={cols}>
                 <NodeViewContent className='contents [&>div]:contents' />
                 <div className='absolute right-2 bottom-2 flex col-span-full p-4 flex-col '>
                     <Button
@@ -70,7 +70,7 @@ function Component({
                         Add New Card
                     </Button>
                 </div>
-            </HlcCardGroup>
+            </CardGroup>
         </NodeViewWrapper>
     )
 }

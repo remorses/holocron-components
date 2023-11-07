@@ -68,7 +68,7 @@ function isUrl(str: string) {
     return str.startsWith('http://') || str.startsWith('https://')
 }
 
-export function HlcCard<T extends ElementType = 'div'>({
+export function Card<T extends ElementType = 'div'>({
     title,
     icon,
     _iconElement,

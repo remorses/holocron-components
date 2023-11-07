@@ -10,9 +10,9 @@ type CalloutProps = {
 
 const classes = ['note', 'warning', 'info', 'tip', 'check'] as const
 
-export type HlcCalloutType = (typeof classes)[number]
+export type CalloutType = (typeof classes)[number]
 
-export function HlcCallout({ type = 'note' as HlcCalloutType, children }) {
+export function Callout({ type = 'note' as CalloutType, children }) {
     if (type === 'warning') {
         return <Warning>{children}</Warning>
     }

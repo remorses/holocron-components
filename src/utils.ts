@@ -5,11 +5,11 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 
 export function makeExtensionConfig({
     tagName,
-    importSource,
+    namespace = 'Holocron',
     attributes,
 }: {
     tagName: string
-    importSource?: string
+    namespace?: string
     attributes: Record<string, { default?: any }>
 }) {
     const defaultExtensionStuff: Partial<NodeConfig> = {
@@ -48,7 +48,7 @@ export function makeExtensionConfig({
                         if (node.attrs._additionalProps) {
                             props += ' ' + node.attrs._additionalProps
                         }
-                        state.write(`<${tagName} ${props}>`)
+                        state.write(`<${namespace}.${tagName} ${props}>`)
                         state.ensureNewLine()
                         state.wrapBlock('    ', null, node, () =>
                             state.renderContent(node),
@@ -56,7 +56,7 @@ export function makeExtensionConfig({
                         // flushClose(1) prevents write() from adding a \n if previous block is closed
                         // @ts-ignore
                         state.flushClose(1)
-                        state.write(`</${tagName}>\n`)
+                        state.write(`</${namespace}.${tagName}>\n`)
                         if (!state['delim']) {
                             state.write('\n')
                         }

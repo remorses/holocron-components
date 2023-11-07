@@ -8,13 +8,13 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { holocronExtensionTypes } from './constants'
-import { HlcCard } from './card'
-import { HlcCardGroup } from './card-group'
+import { Card } from './card'
+import { CardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
 import { Button } from '@nextui-org/react'
-import { HlcTabs } from './tabs'
+import { Tabs } from './tabs'
 
-const tagName = 'HlcTabGroup'
+const tagName = 'TabGroup'
 export const TabGroupExtension = Node.create({
     name: holocronExtensionTypes.tabGroup,
     group: 'block',
@@ -44,7 +44,7 @@ function Component({
 
     return (
         <NodeViewWrapper>
-            <HlcTabs
+            <Tabs
                 _additionalTabTitle={
                     <Button
                         size='sm'
@@ -76,7 +76,7 @@ function Component({
                 }
             >
                 <NodeViewContent />
-            </HlcTabs>
+            </Tabs>
         </NodeViewWrapper>
     )
 }

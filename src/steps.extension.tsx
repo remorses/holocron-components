@@ -8,13 +8,13 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { holocronExtensionTypes } from './constants'
-import { HlcCard } from './card'
-import { HlcCardGroup } from './card-group'
+import { Card } from './card'
+import { CardGroup } from './card-group'
 import { makeExtensionConfig } from './utils'
 import { Button } from '@nextui-org/react'
-import { HlcSteps } from './steps'
+import { Steps } from './steps'
 
-const tagName = 'HlcSteps'
+const tagName = 'Steps'
 export const StepsExtension = Node.create({
     name: holocronExtensionTypes.stepsGroup,
     group: 'block',
@@ -42,9 +42,9 @@ function Component({
 }: NodeViewProps) {
     return (
         <NodeViewWrapper>
-            <HlcSteps>
+            <Steps>
                 <NodeViewContent />
-            </HlcSteps>
+            </Steps>
         </NodeViewWrapper>
     )
 }

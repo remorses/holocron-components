@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState, ReactElement, Children, ReactNode } from 'react'
 
-export function HlcTabs({ children, _additionalTabTitle }) {
+export function Tabs({ children, _additionalTabTitle }) {
     const [activeTabIndex, setActiveTabIndex] = useState(0)
     const arrayChildren = Children.toArray(children) as ReactElement[]
     const activeTabContent = arrayChildren[activeTabIndex]?.props?.children
@@ -17,7 +17,7 @@ export function HlcTabs({ children, _additionalTabTitle }) {
                         className='cursor-pointer'
                         onClick={() => setActiveTabIndex(i)}
                     >
-                        <HlcTab
+                        <Tab
                             title={title ?? 'Tab Title'}
                             isActive={i === activeTabIndex}
                         />
@@ -29,7 +29,7 @@ export function HlcTabs({ children, _additionalTabTitle }) {
     )
 }
 
-export function HlcTab({
+export function Tab({
     title,
     isActive = true,
     children,

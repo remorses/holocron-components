@@ -53,10 +53,8 @@ import { HlcCallout } from '@holocron.so/components'
 
 > You can also expose the components globally in your MDX files for easier access
 
-## Why the `Hlc` prefix?
+## Why the `Holocron` namespace?
 
-`Hlc` stands for Holocron, it's a prefix used to avoid collisions with other MDX components.
+The Holocron editor automatically detects the components with the `Holocron` namespace and allows you to edit your MDX files visually in a WYSIWYG editor.
 
-The Holocron editor automatically detects the components with this prefix and allows you to edit your MDX files visually in a WYSIWYG editor.
 
-Having a common prefix also makes it easier to browse available components with the TypeScript auto-import feature.

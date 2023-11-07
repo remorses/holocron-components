@@ -6,11 +6,11 @@ import {
 } from '@tiptap/react'
 import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
-import { Note, Tip, Warning, Check, Info, HlcCalloutType, HlcCallout } from './callout'
+import { Note, Tip, Warning, Check, Info, CalloutType, Callout } from './callout'
 import { holocronExtensionTypes } from './constants'
 import { makeExtensionConfig } from './utils'
 
-const tagName = 'HlcCallout'
+const tagName = 'Callout'
 export const CalloutExtension = Node.create({
     name: holocronExtensionTypes.callout,
     group: 'block',
@@ -21,7 +21,7 @@ export const CalloutExtension = Node.create({
         tagName,
         attributes: {
             type: {
-                default: 'note' satisfies HlcCalloutType,
+                default: 'note' satisfies CalloutType,
             },
         },
     }),
@@ -35,9 +35,9 @@ function Component({ node, updateAttributes }: NodeViewProps) {
 
     return (
         <NodeViewWrapper>
-            <HlcCallout type={type}>
+            <Callout type={type}>
                 <NodeViewContent className='' />
-            </HlcCallout>
+            </Callout>
         </NodeViewWrapper>
     )
 }

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React, { ReactNode } from 'react'
 
-export function HlcCardGroup({
+export function CardGroup({
     children,
     cols = 2,
     className,

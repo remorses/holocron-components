@@ -14,7 +14,7 @@ import { MarkdownSerializerState } from 'prosemirror-markdown'
 import { Node as PNode } from 'prosemirror-model'
 import { Note, Tip, Warning, Check, Info } from './callout'
 import { holocronExtensionTypes } from './constants'
-import { HlcCard, Icon } from './card'
+import { Card, Icon } from './card'
 import {
     Button,
     Dropdown,
@@ -44,7 +44,7 @@ let iconUrlProvider = `https://holocron.so/icon`
 // iconUrlProvider = `https://api.iconify.design`
 const inputClass = 'card-title-input'
 
-const tagName = 'HlcCard'
+const tagName = 'Card'
 
 export const CardExtension = Node.create({
     name: holocronExtensionTypes.card,
@@ -83,7 +83,7 @@ function Component({
     const inputRef = useRef<HTMLInputElement>(null)
     return (
         <NodeViewWrapper>
-            <HlcCard
+            <Card
                 className='group relative non-draggable'
                 icon={icon}
                 _iconElement={
@@ -165,7 +165,7 @@ function Component({
                     </Button>
                 </div>
                 <NodeViewContent className='' />
-            </HlcCard>
+            </Card>
         </NodeViewWrapper>
     )
 }
