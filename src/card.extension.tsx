@@ -467,7 +467,7 @@ function absoluteUrl(url: string) {
         const editorPos = window.location.pathname.indexOf('/editor')
         if (editorPos > -1) {
             const base = window.location.pathname.slice(0, editorPos)
-            return `${window.location.origin}${base}${url}`
+            return `${window.location.origin}${base}/editor${url}`
         }
         return `${window.location.origin}${url}`
     }
