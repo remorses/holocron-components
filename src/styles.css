@@ -1,14 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* adds some specifity so placeholder does not show up in the editor */
 .ProseMirror .hlc-steps,
 .hlc-steps {
     h1,
     h2,
-    h3 {
+    h3,
+    h4 {
         counter-increment: step;
-
         &::before {
             @apply absolute w-[33px] h-[33px];
-            @apply border-3 flex flex-col items-center justify-center font-mono border-white bg-gray-100 dark:border-gray-900 dark:bg-neutral-800;
+            @apply border-4 flex flex-col items-center justify-center font-mono border-white bg-gray-100 dark:border-gray-900 dark:bg-neutral-800;
             @apply rounded-xl text-neutral-400 text-sm text-center -indent-px;
             @apply mt-[3px] ml-[-46px];
             content: counter(step) !important;
