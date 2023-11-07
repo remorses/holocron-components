@@ -463,6 +463,12 @@ function absoluteUrl(url: string) {
         return url
     }
     if (url.startsWith('/')) {
+        // find /editor path, use it as base
+        const editorPos = window.location.pathname.indexOf('/editor')
+        if (editorPos > -1) {
+            const base = window.location.pathname.slice(0, editorPos)
+            return `${window.location.origin}${base}${url}`
+        }
         return `${window.location.origin}${url}`
     }
     if (url.startsWith('mailto:')) {
