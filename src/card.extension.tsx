@@ -464,10 +464,11 @@ function absoluteUrl(url: string) {
     }
     if (url.startsWith('/')) {
         // find /editor path, use it as base
-        const editorPos = window.location.pathname.indexOf('/editor')
+        const lastPath = '/editor'
+        const editorPos = window.location.pathname.indexOf(lastPath)
         if (editorPos > -1) {
             const base = window.location.pathname.slice(0, editorPos)
-            return `${window.location.origin}${base}/editor${url}`
+            return `${window.location.origin}${base}${lastPath}${url}`
         }
         return `${window.location.origin}${url}`
     }
