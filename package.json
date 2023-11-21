@@ -45,7 +45,7 @@
         "@nextui-org/theme": "^2.1.17",
         "@tiptap/core": "^2.1.12",
         "@tiptap/react": "^2.1.12",
-        "@types/react": "18.2.37",
+        "@types/react": "18.2.38",
         "autoprefixer": "^10.4.14",
         "postcss": "^8.4.31",
         "postcss-nesting": "^12.0.1",
