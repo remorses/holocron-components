@@ -52,6 +52,6 @@
         "prosemirror-markdown": "^1.11.2",
         "prosemirror-model": "^1.19.3",
         "react": "18.3.1",
-        "tailwindcss": "^3.4.1"
+        "tailwindcss": "^3.4.4"
     }
 }
